@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import {LandingPageComponent} from './pages/landing-page'
 import { Dashboard} from './pages/admin/dashboard'
@@ -13,7 +10,6 @@ import { StudentHomeComponent } from './components/student-home'
 import {RecoilRoot } from "recoil"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>

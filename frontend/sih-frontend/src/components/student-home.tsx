@@ -115,7 +115,7 @@ function NavBar() {
   )
 }
 
-function Post({ post }) {
+function Post({ post }:any) {
   const [likes, setLikes] = useState(post.likes)
   const [liked, setLiked] = useState(false)
   const [commentText, setCommentText] = useState('')
@@ -127,7 +127,7 @@ function Post({ post }) {
     setLiked(!liked)
   }
 
-  const handleComment = (e) => {
+  const handleComment = (e:any) => {
     e.preventDefault()
     if (commentText.trim()) {
       setComments(comments + 1)
@@ -142,8 +142,8 @@ function Post({ post }) {
           <Avatar className="h-9 w-9">
             <AvatarImage src="/placeholder.svg" alt="Avatar" />
             <AvatarFallback>
-              {post.author ? post.author.split(' ').map(n => n[0]).join('') : 
-               post.inventor ? post.inventor.split(' ').map(n => n[0]).join('') : 'TM'}
+              {post.author ? post.author.split(' ').map((n:any) => n[0]).join('') : 
+               post.inventor ? post.inventor.split(' ').map((n:any) => n[0]).join('') : 'TM'}
             </AvatarFallback>
           </Avatar>
           <div className="ml-4">
@@ -161,15 +161,15 @@ function Post({ post }) {
         </Link>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="ghost" className="flex items-center" onClick={handleLike}>
+        <Button  className="flex items-center" onClick={handleLike}>
           <Heart className={`mr-2 h-4 w-4 ${liked ? 'fill-current text-red-500' : ''}`} />
           {likes}
         </Button>
-        <Button variant="ghost" className="flex items-center" onClick={() => setShowComments(!showComments)}>
+        <Button  className="flex items-center" onClick={() => setShowComments(!showComments)}>
           <MessageCircle className="mr-2 h-4 w-4" />
           {comments}
         </Button>
-        <Button variant="ghost" className="flex items-center">
+        <Button  className="flex items-center">
           <Share2 className="mr-2 h-4 w-4" />
           Share
         </Button>

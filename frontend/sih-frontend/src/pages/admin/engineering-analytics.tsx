@@ -1,10 +1,13 @@
+'use client'
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line } from 'recharts'
+import { Link } from 'react-router-dom';
 import { GraduationCap } from 'lucide-react'
-
+// Updated mock data for engineering departments
 const departmentColors: { [key: string]: string } = {
   "Computer Science": "#FF6384",
   "Mechanical Engineering": "#36A2EB",
@@ -62,17 +65,17 @@ const competitionData = [
 ]
 
 export default function EngineeringAnalytics() {
-  const [timeframe, setTimeframe] = useState<string>("monthly");
+  const [timeframe, setTimeframe] = useState<string>("monthly")
 
   const renderPieChart = (data: any[], dataKey = "value") => (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           labelLine={false}
-          outerRadius={120} // Increased outer radius for larger pie chart
+          outerRadius={80}
           fill="#8884d8"
           dataKey={dataKey}
           label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -84,10 +87,10 @@ export default function EngineeringAnalytics() {
         <Tooltip />
       </PieChart>
     </ResponsiveContainer>
-  );
+  )
 
   const renderProgressChart = (data: any[]) => (
-    <ResponsiveContainer width="100%" height={400}> {/* Increased height for line chart */}
+    <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
         <XAxis dataKey={timeframe === "monthly" ? "name" : "year"} />
         <YAxis />
@@ -98,10 +101,10 @@ export default function EngineeringAnalytics() {
         ))}
       </LineChart>
     </ResponsiveContainer>
-  );
+  )
 
   const renderCompetitionChart = () => (
-    <ResponsiveContainer width="100%" height={400}> {/* Increased height for bar chart */}
+    <ResponsiveContainer width="100%" height={300}>
       <BarChart data={competitionData}>
         <XAxis dataKey="name" />
         <YAxis />
@@ -111,107 +114,137 @@ export default function EngineeringAnalytics() {
         <Bar dataKey="won" fill="#82ca9d" name="Won" />
       </BarChart>
     </ResponsiveContainer>
-  );
+  )
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <header className="w-full bg-card shadow-sm">
-        <div className="w-full px-8"> {/* Increased padding */}
+    <div className="w-screen top-0 absolute left-0 min-h-screen  mx-auto">
+  
+      {/* Header Section */}
+      <header className="w-full bg-white shadow-sm">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <GraduationCap className="h-10 w-10 text-primary" /> {/* Larger icon */}
-                <span className="ml-2 text-3xl font-bold text-primary">Analytics</span> {/* Larger font size */}
+                <GraduationCap className="h-8 w-8 text-primary" />
+                <span className="ml-2 text-2xl font-bold text-primary">Analytics</span>
               </div>
               <nav className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <a href="/rankings" className="border-primary text-primary inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                <Link
+                  to="/rankings"
+                  className="border-primary text-primary inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
                   Rankings
-                </a>
-                <a href="/enganalysis" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                </Link>
+                <Link
+                  to="/enganalysis"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
                   Analytics
-                </a>
-                <a href="/researchpap" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                </Link>
+                <Link
+                  to="/researchpap"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
                   Research Papers
-                </a>
-                <a href="/patents" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                </Link>
+                <Link
+                  to="/patents"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
                   Patents
-                </a>
-                <a href="/competitions" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-lg font-medium">
+                </Link>
+                <Link
+                  to="/competitions"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
                   Competitions
-                </a>
+                </Link>
               </nav>
             </div>
           </div>
         </div>
       </header>
-
-      <main className="flex-grow w-full px-8 py-8"> {/* Increased padding */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold">Engineering Department Analytics</h1> {/* Larger font size */}
-        </div>
-
-        <Tabs defaultValue="overview" className="space-y-8"> {/* Increased vertical spacing */}
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="progress">Progress Tracking</TabsTrigger>
-            <TabsTrigger value="competitions">Competitions</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8"> {/* Increased grid gap */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Research Papers Distribution</CardTitle>
-                </CardHeader>
-                <CardContent>{renderPieChart(researchPapersData)}</CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Patents Distribution</CardTitle>
-                </CardHeader>
-                <CardContent>{renderPieChart(patentsData)}</CardContent>
-              </Card>
-            </div>
+  
+      {/* Title Section */}
+      <div className="w-full text-center my-8">
+        <h1 className="text-3xl font-bold">Engineering Department Analytics</h1>
+      </div>
+  
+      {/* Tabs Section */}
+      <div className="w-full flex justify-center">
+      <Tabs defaultValue="overview" className="w-2/3 space-y-4">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="progress">Progress Tracking</TabsTrigger>
+          <TabsTrigger value="competitions">Competitions</TabsTrigger>
+        </TabsList>
+  
+        {/* Overview Tab */}
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader>
-                <CardTitle>Innovation Metrics Contribution</CardTitle>
-              </CardHeader>
-              <CardContent>{renderPieChart(innovationMetricsData)}</CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="progress" className="space-y-8">
-            <div className="flex justify-end mb-4">
-              <Select value={timeframe} onValueChange={setTimeframe}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select timeframe" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="monthly">Monthly</SelectItem>
-                  <SelectItem value="yearly">Yearly</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Department Progress Over Time</CardTitle>
+                <CardTitle>Research Papers Distribution</CardTitle>
               </CardHeader>
               <CardContent>
-                {renderProgressChart(timeframe === "monthly" ? monthlyProgressData : yearlyProgressData)}
+                {renderPieChart(researchPapersData)}
               </CardContent>
             </Card>
-          </TabsContent>
-
-          <TabsContent value="competitions" className="space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle>Competitions Participated vs Won</CardTitle>
+                <CardTitle>Patents Distribution</CardTitle>
               </CardHeader>
-              <CardContent>{renderCompetitionChart()}</CardContent>
+              <CardContent>
+                {renderPieChart(patentsData)}
+              </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
-      </main>
+          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Innovation Metrics Contribution</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {renderPieChart(innovationMetricsData)}
+            </CardContent>
+          </Card>
+        </TabsContent>
+  
+        {/* Progress Tab */}
+        <TabsContent value="progress" className="space-y-4">
+          <div className="flex justify-end mb-4">
+            <Select value={timeframe} onValueChange={setTimeframe}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select timeframe" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Department Progress Over Time</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {renderProgressChart(timeframe === "monthly" ? monthlyProgressData : yearlyProgressData)}
+            </CardContent>
+          </Card>
+        </TabsContent>
+  
+        {/* Competitions Tab */}
+        <TabsContent value="competitions" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Competitions Participated vs Won</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {renderCompetitionChart()}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+      </div>
     </div>
   );
 }
