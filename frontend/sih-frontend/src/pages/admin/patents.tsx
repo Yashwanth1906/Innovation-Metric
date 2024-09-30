@@ -34,10 +34,9 @@ export function PatentsComponent() {
       (selectedDomain === "All" || patent.domain === selectedDomain)
     )
   }, [selectedDepartment, selectedDomain])
-
   return (
-    <div className="container mx-auto px-4 py-8">
-            <header className="bg-white shadow-sm">
+    <div className="min-h-screen flex flex-col items-center justify-start">
+      <header className="bg-white shadow-sm w-full fixed top-0 left-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -63,66 +62,68 @@ export function PatentsComponent() {
                 </Link>
               </nav>
             </div>
-            
           </div>
         </div>
       </header>
-      
-      <br></br>
-      <h1 className="text-3xl font-bold mb-8 text-center">Institutional Patents</h1>
-      
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-        <Select onValueChange={setSelectedDepartment}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select Department" />
-          </SelectTrigger>
-          <SelectContent>
-            {departments.map(dept => (
-              <SelectItem key={dept} value={dept}>{dept}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        
-        <Select onValueChange={setSelectedDomain}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select Domain" />
-          </SelectTrigger>
-          <SelectContent>
-            {domains.map(domain => (
-              <SelectItem key={domain} value={domain}>{domain}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <p className="text-center mb-8 text-lg font-semibold">
-        Showing {filteredPatents.length} out of {patents.length} patents
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPatents.map(patent => (
-          <Card key={patent.id} className="flex flex-col">
-            <CardHeader>
-              <CardTitle className="text-xl">{patent.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="text-sm text-muted-foreground mb-2">
-                <span className="font-semibold">Inventor:</span> {patent.inventor}
-              </p>
-              <p className="text-sm text-muted-foreground mb-2">
-                <span className="font-semibold">Domain:</span> {patent.domain}
-              </p>
-              <p className="text-sm text-muted-foreground mb-4">
-                <span className="font-semibold">Department:</span> {patent.department}
-              </p>
-              <p className="text-sm">{patent.description}</p>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full" variant="outline">View Details</Button>
-            </CardFooter>
-          </Card>
-        ))}
+  
+      {/* Content section starts here */}
+      <div className="container mx-auto px-4 py-20"> {/* Added py-20 to create space under fixed header */}
+        <h1 className="text-3xl font-bold mb-8 text-center">Institutional Patents</h1>
+  
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+          <Select onValueChange={setSelectedDepartment}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Department" />
+            </SelectTrigger>
+            <SelectContent>
+              {departments.map(dept => (
+                <SelectItem key={dept} value={dept}>{dept}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+  
+          <Select onValueChange={setSelectedDomain}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Domain" />
+            </SelectTrigger>
+            <SelectContent>
+              {domains.map(domain => (
+                <SelectItem key={domain} value={domain}>{domain}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+  
+        <p className="text-center mb-8 text-lg font-semibold">
+          Showing {filteredPatents.length} out of {patents.length} patents
+        </p>
+  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPatents.map(patent => (
+            <Card key={patent.id} className="flex flex-col">
+              <CardHeader>
+                <CardTitle className="text-xl">{patent.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground mb-2">
+                  <span className="font-semibold">Inventor:</span> {patent.inventor}
+                </p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  <span className="font-semibold">Domain:</span> {patent.domain}
+                </p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  <span className="font-semibold">Department:</span> {patent.department}
+                </p>
+                <p className="text-sm">{patent.description}</p>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full" variant="outline">View Details</Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
-  )
+  );
+  
 }

@@ -43,7 +43,7 @@ export function Dashboard() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex w-screen absolute top-0 left-0 flex-col min-h-screen bg-gray-100 ">
       {/* Top Navigation Bar */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

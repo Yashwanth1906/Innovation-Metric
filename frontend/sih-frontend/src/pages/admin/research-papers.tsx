@@ -36,8 +36,10 @@ export function ResearchPapersComponent() {
   }, [selectedDepartment, selectedDomain])
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen flex flex-col items-center justify-start">
+      <br />
+      <br />
+      <header className="bg-white shadow-sm w-full fixed top-0 left-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">

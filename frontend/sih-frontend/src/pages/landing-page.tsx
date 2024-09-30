@@ -37,7 +37,7 @@ export function LandingPageComponent() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-3xl">
-                <Link to="/signin" className="w-full h-auto">
+                <Link to="/studenthome" className="w-full h-auto">
                   <Button variant="outline" className="w-full h-auto py-4 px-6 flex flex-col items-center">
                     <img
                       src="https://static.vecteezy.com/system/resources/previews/000/511/962/original/vector-student-glyph-black-icon.jpg" // Ensure this path is correct
